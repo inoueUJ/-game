@@ -42,12 +42,11 @@ describe('filterById', () => {
         expect(result.map(e => e.id)).toEqual(['1-1', '1-2']);
     });
 
-    test('should handle idArray with more than 3 elements (though only first 3 are used by current implementation)', () => {
-        // The current implementation only checks index 0, 1, and 2
+    test('should handle idArray with more than 3 elements', () => {
         const ids = ['1-1', '1-2', '1-3', '2-1'];
         const result = filterById(mockSquares, ids);
-        expect(result).toHaveLength(3);
-        expect(result.map(e => e.id)).toEqual(['1-1', '1-2', '1-3']);
+        expect(result).toHaveLength(4);
+        expect(result.map(e => e.id)).toEqual(['1-1', '1-2', '1-3', '2-1']);
     });
 
     test('should return empty array if targetArray is empty', () => {
