@@ -97,41 +97,47 @@ resetBtn.addEventListener('click', function() {
 });
 
 
-//　マスをクリックした時のイベント発火
-squaresArray.forEach((square) => {
-    square.addEventListener('click', () => {
-        if (flag === true) {
-            square.classList.add('js-maru-checked');
-            square.classList.add('js-unclickable');
 
-            if (isWinner('maru')) {
-                setMessage('maru-win');
-                gameOver();
-                return;
-            }
+// マスをクリックした時のイベント発火
+const squaresBox = document.querySelector('.squares-box');
+squaresBox.addEventListener('click', (e) => {
+    const square = e.target;
+    // クリックされた要素がマスであり、かつクリック可能であるか判定
+    if (!square.classList.contains('square') || square.classList.contains('js-unclickable')) {
+        return;
+    }
 
-            setMessage('batsu-turn');
-            flag = false;
+    if (flag === true) {
+        square.classList.add('js-maru-checked');
+        square.classList.add('js-unclickable');
 
-        } else {
-            square.classList.add('js-batsu-checked');
-            square.classList.add('js-unclickable');
-
-            if (isWinner('batsu')) {
-                setMessage('batsu-win');
-                gameOver();
-                return;
-            }
-
-            setMessage('maru-turn');
-            flag = true;
-        }
-
-        counter--;
-        // 引き分け判定
-        if (counter === 0) {
-            setMessage('draw');
+        if (isWinner('maru')) {
+            setMessage('maru-win');
             gameOver();
+            return;
         }
-    });
+
+        setMessage('batsu-turn');
+        flag = false;
+
+    } else {
+        square.classList.add('js-batsu-checked');
+        square.classList.add('js-unclickable');
+
+        if (isWinner('batsu')) {
+            setMessage('batsu-win');
+            gameOver();
+            return;
+        }
+
+        setMessage('maru-turn');
+        flag = true;
+    }
+
+    counter--;
+    // 引き分け判定
+    if (counter === 0) {
+        setMessage('draw');
+        gameOver();
+    }
 });
