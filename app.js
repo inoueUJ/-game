@@ -24,7 +24,7 @@ const setMessage = (id) => {
 // 勝利判定のパターン関数
 const filterById = (targetArray, idArray) => {
     return targetArray.filter((e) => {
-        return (e.id === idArray[0] || e.id === idArray[1] || e.id === idArray[2]);
+        return idArray.includes(e.id);
     });
 }
 // 勝利判定パターン
