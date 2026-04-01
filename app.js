@@ -1,3 +1,12 @@
+// 勝利判定のパターン関数
+const filterById = (targetArray, idArray) => {
+    return targetArray.filter((e) => {
+        return idArray.includes(e.id);
+    });
+}
+
+if (typeof document !== 'undefined') {
+
 // 各種定義
 let flag = false;
 let counter = 9;
@@ -21,12 +30,6 @@ const setMessage = (id) => {
 }
 
 
-// 勝利判定のパターン関数
-const filterById = (targetArray, idArray) => {
-    return targetArray.filter((e) => {
-        return idArray.includes(e.id);
-    });
-}
 // 勝利判定パターン
 const line1 = filterById(squaresArray, ['1-1', '1-2', '1-3']);
 const line2 = filterById(squaresArray, ['2-1', '2-2', '2-3']);
@@ -100,7 +103,7 @@ resetBtn.addEventListener('click', function() {
 
 // マスをクリックした時のイベント発火
 const squaresBox = document.querySelector('.squares-box');
-squaresBox.addEventListener('click', (e) => {
+if (squaresBox) squaresBox.addEventListener('click', (e) => {
     const square = e.target;
     // クリックされた要素がマスであり、かつクリック可能であるか判定
     if (!square.classList.contains('square') || square.classList.contains('js-unclickable')) {
@@ -141,3 +144,9 @@ squaresBox.addEventListener('click', (e) => {
         gameOver();
     }
 });
+
+} // end document guard
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { filterById };
+}
